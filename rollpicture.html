@@ -89,7 +89,7 @@ img:hover{
         <ul class="firstUl">
             <img id="img1" src="./1.png" alt="#">
             <img id="img2" src="./2.jpg" alt="#">
-            <img id="img3" src="/3.jpg" alt="#">
+            <img id="img3" src="./3.jpg" alt="#">
             <img id="img4" src="./4.jpg" alt="#">
         </ul>
         <ul class="secondUl">
@@ -103,7 +103,7 @@ img:hover{
     </div>
     
     <script>
-        const imgOne = ['./1.png','./2.jpg','/3.jpg','./4.jpg']
+        const imgOne = ['./1.png','./2.jpg','./3.jpg','./4.jpg']
         let sum=0
         let img1=document.getElementById('img1')
         let img2=document.getElementById('img2')
@@ -129,6 +129,14 @@ img:hover{
         }
         //左移
         let leftButton = document.querySelector(".left")
+        // leftButton.onclick = throttle(function(){
+        //         let img = imgOne[0]
+        //         imgOne.shift()
+        //         imgOne.push(img)
+        //         console.log(imgOne);
+        //         cImg()
+        //         add(-1)
+        // },1000)
         leftButton.onclick = function(){
             let img = imgOne[0]
             imgOne.shift()
@@ -139,7 +147,15 @@ img:hover{
         }
         //右移
         let rightButton = document.querySelector(".right")
-        rightButton.onclick = function moveright(){
+        // rightButton.onclick = throttle(function(){
+        //         let img = imgOne[3]
+        //         imgOne.pop()
+        //         imgOne.unshift(img)
+        //         console.log(imgOne);
+        //         cImg()
+        //         add(1)
+        // },1000)
+        rightButton.onclick = function(){
             let img = imgOne[3]
             imgOne.pop()
             imgOne.unshift(img)
@@ -194,6 +210,21 @@ img:hover{
         Liall[3].addEventListener("click",function(){
             calculatePosition(3)
         })
+        //节流含糊让左移和右移多次点击变稳定
+        function throttle(fn,delay){
+            let timeout = null
+            return function(){
+                let tt = this
+                let args = arguments
+                if(!timeout){
+                    timeout = setTimeout(function(){
+                        timeout=null
+                        fn.apply(this,args)
+                    }, delay);
+                }
+            }
+        }
+       
     </script>
 </body>
 </html>
